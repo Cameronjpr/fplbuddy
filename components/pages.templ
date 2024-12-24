@@ -20,8 +20,8 @@ templ layout() {
 		</head>
 		<body hx-boost="true" class="m-auto max-w-4xl p-4">
 			<header>
-				<nav class="flex flex-col sm:flex-row gap-2 justify-between items-center">
-					<div>
+				<nav class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+					<div class="flex flex-col sm:flex-row gap-2 items-center justify-between w-full">
 						<ul>
 							<li>
 								<a href="/" class="hero">🛠️ FPL Buddy</a>
@@ -42,7 +42,7 @@ templ layout() {
 							</li>
 						</ul>
 					</div>
-					<div class="flex justify-end">
+					<div class="flex justify-end w-full">
 						@PlayerSearchBar([]core.Player{})
 					</div>
 				</nav>
@@ -79,7 +79,7 @@ templ HomePage(homepageData core.HomepageResponse) {
 templ PlayersPage(playersResponse core.PlayersResponse) {
 	@layout() {
 		<div class="flex flex-col gap-4">
-			<nav class="flex flex-col sm:flex-row gap-4 items-center justify-between w-full">
+			<nav class="flex gap-2 items-center justify-between w-full">
 				// <ul>
 				// 	<li>
 				// 		<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Prev)) }>Prev</a>
@@ -88,18 +88,19 @@ templ PlayersPage(playersResponse core.PlayersResponse) {
 				// 		<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Next)) }>Next</a>
 				// 	</li>
 				// </ul>
-				<div class="flex flex-col sm:flex-row gap-4 items-center justify-between w-full">
+				<div class="flex flex-col sm:flex-row gap-4 items-center w-full">
 					<input
 						type="text"
 						name="search"
-						placeholder="Begin Typing To Search Users..."
+						class="w-full sm:w-72"
+						placeholder="Search players..."
 						hx-post="/players"
 						hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
 						hx-target="#players-table"
 						hx-indicator=".htmx-indicator"
 						minlength="3"
 					/>
-					<select name="club" hx-get="/players?club={value}" hx-target="#players-table">
+					<select class="hidden sm:block" name="club" hx-get="/players?club={value}" hx-target="#players-table">
 						<option value="">All</option>
 						for id, name := range shared.ClubNames {
 							<option value={ strconv.Itoa(id) }>{ name }</option>

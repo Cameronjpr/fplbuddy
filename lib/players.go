@@ -62,10 +62,6 @@ func GetPlayers(skip, limit int, search string, sort string) (core.PlayersRespon
 	}
 
 	players, err := pgx.CollectRows(rows, pgx.RowToStructByName[core.Player])
-
-	for _, player := range players {
-		fmt.Println(player)
-	}
 	if err != nil {
 		return res, err
 	}

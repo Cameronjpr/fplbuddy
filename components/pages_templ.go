@@ -160,7 +160,7 @@ func PlayersPage(playersResponse core.PlayersResponse) templ.Component {
 				var templ_7745c5c3_Var6 string
 				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(id))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/pages.templ`, Line: 105, Col: 39}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/pages.templ`, Line: 106, Col: 39}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 				if templ_7745c5c3_Err != nil {
@@ -173,7 +173,7 @@ func PlayersPage(playersResponse core.PlayersResponse) templ.Component {
 				var templ_7745c5c3_Var7 string
 				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/pages.templ`, Line: 105, Col: 48}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/pages.templ`, Line: 106, Col: 48}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 				if templ_7745c5c3_Err != nil {
@@ -358,7 +358,7 @@ func PlayerPage(p core.Player) templ.Component {
 			var templ_7745c5c3_Var14 string
 			templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/pages.templ`, Line: 140, Col: 15}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/pages.templ`, Line: 141, Col: 15}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 			if templ_7745c5c3_Err != nil {
@@ -371,7 +371,7 @@ func PlayerPage(p core.Player) templ.Component {
 			var templ_7745c5c3_Var15 string
 			templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/pages.templ`, Line: 141, Col: 94}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/pages.templ`, Line: 142, Col: 94}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 			if templ_7745c5c3_Err != nil {

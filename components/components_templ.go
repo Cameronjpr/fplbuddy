@@ -410,7 +410,7 @@ func PlayersTable(playersResponse core.PlayersResponse) templ.Component {
 			var templ_7745c5c3_Var17 string
 			templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(p.FplElementId))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 136, Col: 62}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 137, Col: 62}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 			if templ_7745c5c3_Err != nil {
@@ -423,7 +423,7 @@ func PlayersTable(playersResponse core.PlayersResponse) templ.Component {
 			var templ_7745c5c3_Var18 string
 			templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(p.FplElementId))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 137, Col: 64}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 138, Col: 64}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 			if templ_7745c5c3_Err != nil {
@@ -436,7 +436,7 @@ func PlayersTable(playersResponse core.PlayersResponse) templ.Component {
 			var templ_7745c5c3_Var19 string
 			templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(p.FplElementId))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 137, Col: 117}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 138, Col: 117}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 			if templ_7745c5c3_Err != nil {
@@ -449,7 +449,7 @@ func PlayersTable(playersResponse core.PlayersResponse) templ.Component {
 			var templ_7745c5c3_Var20 string
 			templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 138, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 139, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 			if templ_7745c5c3_Err != nil {
@@ -462,7 +462,7 @@ func PlayersTable(playersResponse core.PlayersResponse) templ.Component {
 			var templ_7745c5c3_Var21 string
 			templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(p.Position))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 141, Col: 36}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 142, Col: 36}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var21))
 			if templ_7745c5c3_Err != nil {
@@ -475,7 +475,7 @@ func PlayersTable(playersResponse core.PlayersResponse) templ.Component {
 			var templ_7745c5c3_Var22 string
 			templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(p.Form, 'f', -1, 32))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 142, Col: 52}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 143, Col: 52}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 			if templ_7745c5c3_Err != nil {
@@ -488,7 +488,7 @@ func PlayersTable(playersResponse core.PlayersResponse) templ.Component {
 			var templ_7745c5c3_Var23 string
 			templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(p.NowCost, 'f', -1, 32))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 143, Col: 55}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 144, Col: 55}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var23))
 			if templ_7745c5c3_Err != nil {
@@ -623,7 +623,7 @@ func PlayerGridCard(p core.Player) templ.Component {
 		var templ_7745c5c3_Var28 string
 		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 172, Col: 95}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 173, Col: 95}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 		if templ_7745c5c3_Err != nil {
@@ -636,7 +636,7 @@ func PlayerGridCard(p core.Player) templ.Component {
 		var templ_7745c5c3_Var29 string
 		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 175, Col: 16}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 176, Col: 16}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 		if templ_7745c5c3_Err != nil {
@@ -649,7 +649,7 @@ func PlayerGridCard(p core.Player) templ.Component {
 		var templ_7745c5c3_Var30 string
 		templ_7745c5c3_Var30, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(p.NowCost, 'f', -1, 32))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 177, Col: 76}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 178, Col: 76}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var30))
 		if templ_7745c5c3_Err != nil {
@@ -662,7 +662,7 @@ func PlayerGridCard(p core.Player) templ.Component {
 		var templ_7745c5c3_Var31 string
 		templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(p.GwScore))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 178, Col: 37}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 179, Col: 37}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
 		if templ_7745c5c3_Err != nil {

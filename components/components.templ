@@ -94,11 +94,12 @@ templ PlayerSearchBar(results []core.Player) {
 			name="search"
 			type="search"
 			placeholder="Search"
+			minlength="3"
+			autocomplete="off"
 			hx-post="/search"
 			hx-swap="outerHTML"
 			hx-target="#search"
 			hx-trigger="keyup changed delay:500ms"
-			minlength="3"
 		/>
 		<div class="htmx-indicator"></div>
 		if len(results) > 0 {

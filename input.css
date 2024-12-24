@@ -38,6 +38,7 @@
   }
 
   select {
+    @apply h-10;
     @apply px-3 py-1 rounded-md;
     @apply bg-zinc-900 hover:bg-zinc-800;
   }
@@ -48,6 +49,7 @@
   }
 
   input {
+    @apply h-10;
     @apply px-3 py-1 rounded-md;
     @apply bg-zinc-900 hover:bg-zinc-800;
   }
@@ -83,11 +85,11 @@
     @apply bg-zinc-900;
     @apply text-left;
     @apply px-2 py-1;
-    @apply 
   }
 
   table thead tr th button {
     @apply w-full;
+    @apply cursor-ns-resize;
   }
 
   table tr {
