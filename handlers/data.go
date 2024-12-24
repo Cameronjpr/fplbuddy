@@ -55,7 +55,7 @@ func HandleSearchPlayers(w http.ResponseWriter, r *http.Request) {
 		component.Render(r.Context(), w)
 	}
 
-	result, err := lib.GetPlayers(0, 5, search)
+	result, err := lib.GetPlayers(0, 5, search, "")
 
 	if err != nil {
 		fmt.Println("error fetching players", err)

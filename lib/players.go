@@ -37,7 +37,8 @@ func GetPlayer(elementId int) (core.Player, error) {
 	return player, nil
 }
 
-func GetPlayers(skip, limit int, search string) (core.PlayersResponse, error) {
+// Turn into variadic function?
+func GetPlayers(skip, limit int, search string, sort string) (core.PlayersResponse, error) {
 	fmt.Printf("searching for players with name: %s\n", search)
 	db := shared.LoadEnvVar("DATABASE_URL")
 	dbpool, err := pgxpool.New(context.Background(), db)
@@ -49,7 +50,11 @@ func GetPlayers(skip, limit int, search string) (core.PlayersResponse, error) {
 
 	res := core.PlayersResponse{}
 
-	query := "SELECT * FROM players WHERE name ILIKE @search LIMIT @limit OFFSET @skip"
+	query := "SELECT * FROM players WHERE name ILIKE @search"
+	if sort != "" {
+		query += fmt.Sprintf(" ORDER BY %s", sort)
+	}
+	query += " LIMIT @limit OFFSET @skip"
 	rows, err := dbpool.Query(context.Background(), query, pgx.NamedArgs{"search": fmt.Sprintf("%%%s%%", search), "limit": limit, "skip": skip})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "QueryRow failed: %v\n", err)

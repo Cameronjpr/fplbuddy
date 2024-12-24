@@ -94,7 +94,6 @@ templ PlayerSearchBar(results []core.Player) {
 			name="search"
 			type="search"
 			placeholder="Search"
-			class="p-2 rounded-lg border-2 border-gray-300 w-72 sm:w-96"
 			hx-post="/search"
 			hx-swap="outerHTML"
 			hx-target="#search"
@@ -120,36 +119,11 @@ templ PlayerSearchBar(results []core.Player) {
 }
 
 templ PlayersTable(playersResponse core.PlayersResponse) {
-	<div id="players-table">
-		<nav>
-			<ul>
-				<li>
-					<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Prev)) }>Prev</a>
-				</li>
-				<li>
-					<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Next)) }>Next</a>
-				</li>
-			</ul>
-			<input
-				type="text"
-				name="search"
-				placeholder="Begin Typing To Search Users..."
-				hx-post="/players"
-				hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
-				hx-target="#players-table"
-				hx-indicator=".htmx-indicator"
-				minlength="3"
-			/>
-			<ul>
-				<li>
-					<button hx-post="/comparison" hx-include="input[type='checkbox']" hx-swap="transition:true">Compare</button>
-				</li>
-			</ul>
-		</nav>
-		<table>
-			<thead class="sticky">
+	<div id="players-table" class="flex flex-col gap-4">
+		<table class="w-full">
+			<thead class="sticky top-0">
 				<tr>
-					<th hx-get="/players?sort=name" hx-target="#players-table">Name</th>
+					<th><button hx-get="/players?sort=name" hx-target="#players-table">Name</button></th>
 					<th>Position</th>
 					<th>Form</th>
 					<th>Cost</th>
@@ -171,6 +145,15 @@ templ PlayersTable(playersResponse core.PlayersResponse) {
 				}
 			</tbody>
 		</table>
+	</div>
+}
+
+// Could pop up a modal with the players
+templ PlayerComparisonPreview(players []core.Player) {
+	<div class="flex flex-col gap-4">
+		for _, p := range players {
+			@PlayerGridCard(p)
+		}
 	</div>
 }
 

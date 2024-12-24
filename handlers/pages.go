@@ -107,6 +107,7 @@ func HandlePlayersPage(w http.ResponseWriter, r *http.Request) {
 	rawSkip := r.URL.Query().Get("skip")
 	rawLimit := r.URL.Query().Get("limit")
 	search := r.URL.Query().Get("search")
+	sort := r.URL.Query().Get("sort")
 
 	skip, err := strconv.Atoi(rawSkip)
 	if err != nil {
@@ -120,15 +121,20 @@ func HandlePlayersPage(w http.ResponseWriter, r *http.Request) {
 		limit = 25
 	}
 
-	res, err := lib.GetPlayers(skip, limit, search)
+	res, err := lib.GetPlayers(skip, limit, search, sort)
 
 	if err != nil {
 		fmt.Println("error fetching players", err)
 		http.Error(w, "error fetching players", http.StatusInternalServerError)
 	}
 
-	component := components.PlayersPage(res)
-	component.Render(r.Context(), w)
+	if r.Header.Get("HX-Request") == "true" {
+		component := components.PlayersTable(res)
+		component.Render(r.Context(), w)
+	} else {
+		component := components.PlayersPage(res)
+		component.Render(r.Context(), w)
+	}
 }
 
 func HandleGetEntryPage(w http.ResponseWriter, r *http.Request) {

@@ -27,8 +27,81 @@
     @apply hover:underline;
   }
 
+  a.disabled {
+    @apply text-zinc-500;
+    @apply cursor-not-allowed;
+  }
+
   button {
     @apply px-3 py-1 rounded-md;
     @apply bg-zinc-900 hover:bg-zinc-800;
+  }
+
+  select {
+    @apply px-3 py-1 rounded-md;
+    @apply bg-zinc-900 hover:bg-zinc-800;
+  }
+
+  select option {
+    @apply px-3 py-1 rounded-md;
+    @apply bg-zinc-900 hover:bg-zinc-800;
+  }
+
+  input {
+    @apply px-3 py-1 rounded-md;
+    @apply bg-zinc-900 hover:bg-zinc-800;
+  }
+
+  input[type="search"] {
+    @apply px-3 py-1 rounded-md;
+    @apply bg-zinc-900 hover:bg-zinc-800;
+    @apply w-full sm:w-72;
+  }
+
+  input[type="checkbox"] {
+    @apply w-4 h-4;
+    @apply p-2;
+  }
+
+  label {
+    @apply flex flex-row gap-2 items-center;
+  }
+
+  label:has(input[type="checkbox"]) {
+    @apply cursor-pointer;
+  }
+
+  table {
+    @apply border-collapse border-spacing-2 border-zinc-800;
+  }
+
+  table thead {
+    @apply sticky top-0;
+  }
+
+  table thead th {
+    @apply bg-zinc-900;
+    @apply text-left;
+    @apply px-2 py-1;
+    @apply 
+  }
+
+  table thead tr th button {
+    @apply w-full;
+  }
+
+  table tr {
+    @apply border-b border-zinc-800;
+    @apply px-2 py-1;
+    @apply hover:bg-zinc-800;
+  }
+
+  table td {
+    @apply px-2 py-1;
+  }
+
+  table tr:nth-child(odd) {
+    @apply bg-zinc-900;
+    @apply hover:bg-zinc-800;
   }
 }

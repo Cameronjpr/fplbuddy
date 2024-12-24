@@ -23,7 +23,7 @@ func handleSearchPlayers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	players, err := lib.GetPlayers(-1, -1, "")
+	players, err := lib.GetPlayers(-1, -1, "", "")
 
 	if err != nil {
 		fmt.Println("error fetching players", err)

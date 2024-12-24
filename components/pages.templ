@@ -29,16 +29,16 @@ templ layout() {
 						</ul>
 						<ul class="flex gap-4">
 							<li>
-								<a class="secondary" href="/players">Players</a>
+								<a href="/players">Players</a>
 							</li>
 							<li>
-								<a class="secondary" href="/team">Team </a>
+								<a class="disabled" disabled href="/team">Team </a>
 							</li>
 							<li>
-								<a class="secondary" href="/rank">Rank</a>
+								<a class="disabled" disabled href="/rank">Rank</a>
 							</li>
 							<li>
-								<a class="secondary" href="/fdr">FDR</a>
+								<a class="disabled" disabled href="/fdr">FDR</a>
 							</li>
 						</ul>
 					</div>
@@ -78,8 +78,36 @@ templ HomePage(homepageData core.HomepageResponse) {
 
 templ PlayersPage(playersResponse core.PlayersResponse) {
 	@layout() {
-		<div>
-			<h1>Players</h1>
+		<div class="flex flex-col gap-4">
+			<nav class="flex flex-col sm:flex-row gap-4 items-center justify-between w-full">
+				// <ul>
+				// 	<li>
+				// 		<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Prev)) }>Prev</a>
+				// 	</li>
+				// 	<li>
+				// 		<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Next)) }>Next</a>
+				// 	</li>
+				// </ul>
+				<div class="flex flex-col sm:flex-row gap-4 items-center justify-between w-full">
+					<input
+						type="text"
+						name="search"
+						placeholder="Begin Typing To Search Users..."
+						hx-post="/players"
+						hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
+						hx-target="#players-table"
+						hx-indicator=".htmx-indicator"
+						minlength="3"
+					/>
+					<select name="club" hx-get="/players?club={value}" hx-target="#players-table">
+						<option value="">All</option>
+						for id, name := range shared.ClubNames {
+							<option value={ strconv.Itoa(id) }>{ name }</option>
+						}
+					</select>
+				</div>
+				<button class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2" hx-post="/comparison" hx-include="input[type='checkbox'][checked]" hx-swap="transition:true">Compare</button>
+			</nav>
 			@PlayersTable(playersResponse)
 		</div>
 	}
@@ -89,24 +117,9 @@ templ ComparisonPage(players []core.Player) {
 	@layout() {
 		<div>
 			<h1>Comparison</h1>
-			<div class="grid overflow-auto">
+			<div class="flex flex-col sm:flex-row overflow-scroll gap-4">
 				for _, p := range players {
-					<article class="card">
-						<header>
-							<h2>{ p.Name }</h2>
-						</header>
-						<p>Position: { strconv.Itoa(p.Position) }</p>
-						<p>Form: { strconv.FormatFloat(p.Form, 'f', -1, 32) }</p>
-						<p>Cost: { strconv.FormatFloat(p.NowCost, 'f', -1, 32) }</p>
-						<footer>
-							<details>
-								<summary>
-									Detailed stats
-								</summary>
-								Some stats!
-							</details>
-						</footer>
-					</article>
+					@PlayerGridCard(p)
 				}
 			</div>
 		</div>
