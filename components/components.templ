@@ -183,16 +183,18 @@ templ PlayerGrid(players []core.Player) {
 }
 
 templ PlayerGridCard(p core.Player) {
-	<a href={ templ.URL(fmt.Sprintf("/players/%v", strconv.Itoa(p.FplElementId))) } class="bg-zinc-800 rounded-sm p-2 py-4 flex flex-col gap-2 items hover:bg-zinc-900 hover:cursor-pointer">
-		<div>
-			<header class="flex gap-2 items-center">
+	<a href={ templ.URL(fmt.Sprintf("/players/%v", strconv.Itoa(p.FplElementId))) } class="bg-zinc-900 rounded-sm p-3 py-4 flex flex-col gap-2 items hover:bg-zinc-800 hover:cursor-pointer h-24">
+		<div class="flex gap-4 items-center">
+			<div class="h-12 w-12">
 				<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
-				<div class="flex flex-col">
-					<h3>{ p.Name }</h3>
+			</div>
+			<div class="flex flex-col">
+				<h3>{ p.Name }</h3>
+				<div class="flex gap-2 items-center">
 					<small class="cost-tag">£{ strconv.FormatFloat(p.NowCost, 'f', -1, 32) }m</small>
+					<small>{ strconv.Itoa(p.GwScore) }pts</small>
 				</div>
-				<small>{ strconv.Itoa(p.GwScore) }pts</small>
-			</header>
+			</div>
 		</div>
 	</a>
 }

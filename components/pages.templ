@@ -10,6 +10,7 @@ import (
 templ layout() {
 	<html>
 		<head>
+			<meta lang="en"/>
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<meta name="color-scheme" content="light dark"/>
@@ -19,30 +20,31 @@ templ layout() {
 		</head>
 		<body hx-boost="true" class="m-auto max-w-4xl p-4">
 			<header>
-				@PlayerSearchBar([]core.Player{})
-				<nav class="flex justify-between items-center">
-					<ul>
-						<li>
-							<a href="/" class="font-mono text-lg">FPL Buddy</a>
-							<p>
-								<small>power tools for managers</small>
-							</p>
-						</li>
-					</ul>
-					<ul class="flex gap-4">
-						<li>
-							<a class="secondary" href="/players">Players</a>
-						</li>
-						<li>
-							<a class="secondary" href="/team">Team </a>
-						</li>
-						<li>
-							<a class="secondary" href="/rank">Rank</a>
-						</li>
-						<li>
-							<a class="secondary" href="/fdr">FDR</a>
-						</li>
-					</ul>
+				<nav class="flex flex-col sm:flex-row gap-2 justify-between items-center">
+					<div>
+						<ul>
+							<li>
+								<a href="/" class="hero">🛠️ FPL Buddy</a>
+							</li>
+						</ul>
+						<ul class="flex gap-4">
+							<li>
+								<a class="secondary" href="/players">Players</a>
+							</li>
+							<li>
+								<a class="secondary" href="/team">Team </a>
+							</li>
+							<li>
+								<a class="secondary" href="/rank">Rank</a>
+							</li>
+							<li>
+								<a class="secondary" href="/fdr">FDR</a>
+							</li>
+						</ul>
+					</div>
+					<div class="flex justify-end">
+						@PlayerSearchBar([]core.Player{})
+					</div>
 				</nav>
 			</header>
 			<main
@@ -58,9 +60,15 @@ templ layout() {
 templ HomePage(homepageData core.HomepageResponse) {
 	@layout() {
 		<div class="flex flex-col gap-4">
-			<div class="flex gap-4">
-				<button hx-get="/players/trending" hx-target="#main" hx-swap="outerHTML">Team</button>
-				<button hx-get="/players/trending" hx-target="#main" hx-swap="outerHTML">Team</button>
+			<h2>Players</h2>
+			<div class="flex overflow-scroll gap-2 bg-zinc-900 rounded-md p-2 px-4">
+				<button class="text-lg" hx-get="/players/trending" hx-target="#main" hx-swap="outerHTML">🔥 Trending</button>
+				<button class="text-lg" hx-get="/players/risers" hx-target="#main" hx-swap="outerHTML">⬆ Risers</button>
+				<button class="text-lg" hx-get="/players/fallers" hx-target="#main" hx-swap="outerHTML">⬇ Fallers</button>
+				<button class="text-lg" hx-get="/players?position=1" hx-target="#main" hx-swap="outerHTML">🧤 Goalkeepers</button>
+				<button class="text-lg" hx-get="/players?position=2" hx-target="#main" hx-swap="outerHTML">🙅 Defenders</button>
+				<button class="text-lg" hx-get="/players?position=3" hx-target="#main" hx-swap="outerHTML">🤝 Midfielders</button>
+				<button class="text-lg" hx-get="/players?position=4" hx-target="#main" hx-swap="outerHTML">🎯 Forwards</button>
 			</div>
 			@PlayerGrid(homepageData.TrendingPlayers)
 			<h2>Fixtures</h2>

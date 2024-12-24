@@ -1,0 +1,42 @@
+<div class=\"flex flex-col gap-4 w-full bg-red-500\"><h2>TEST</h2></div>
+<div id=\"team-entry\" class=\"flex flex-col gap-4 w-full max-w-2xl m-auto\"><div class=\"flex gap-4 items-center justify-between w-full\"><button hx-get=\"
+\" hx-target=\"#team-entry\" hx-swap=\"outerHTML\">Previous</button> <span class=\"font-bold text-lg\">Gameweek 
+</span> <button hx-get=\"
+\" hx-target=\"#team-entry\" hx-swap=\"outerHTML\">Next</button></div><div class=\"bg-green-600 border-4 border-green-700 py-4 rounded-xl w-full\"><div class=\"px-4\"><div class=\"flex items-center justify-center border-4 border-green-200 w-16 h-16 relative top-0 right-0 bg-white rounded-full\"><span class=\"font-bold\">
+</span><span class=\"text-xs\">pts</span></div></div><div class=\"flex flex-col gap-4 w-full\"><ul class=\"flex justify-center w-full gap-4\">
+</ul><ul class=\"flex justify-center w-full gap-4\">
+</ul><ul class=\"flex justify-center w-full gap-4\">
+</ul><ul class=\"flex justify-center w-full gap-4\">
+</ul><ul class=\"flex justify-center w-full gap-4 border-t-2 pt-4\">
+</ul></div></div></div>
+<div class=\"flex flex-col gap-16\"><h1 class=\"text-4xl font-bold\">Error</h1><p>Something went wrong</p></div>
+<a class=\"w-1/5 flex\" href=\"
+\"><div class=\"w-full text-center flex flex-col overflow-hidden items-center gap-1\"><img src=\"
+\" width=\"48\" height=\"48\"><div class=\"text-xs flex flex-col gap-1 items-center \"><span class=\"font-bold truncate\">
+</span><p class=\"text-lg bg-green-100 rounded-full px-2\">
+</p></div></div></a>
+<div class=\"flex flex-col gap-4 w-full\"><h2>Eleventy Stupid</h2></div>
+<div id=\"search\" class=\"flex flex-col place-content-center\"><input id=\"search-input\" name=\"search\" type=\"search\" placeholder=\"Search\" class=\"p-2 rounded-lg border-2 border-gray-300 w-72 sm:w-96\" hx-post=\"/search\" hx-swap=\"outerHTML\" hx-target=\"#search\" hx-trigger=\"keyup changed delay:500ms\" minlength=\"3\"><div class=\"htmx-indicator\"></div>
+<div class=\"flex flex-col p-1 gap-2 absolute w-72 bg-zinc-900 sm:w-96 top-16 pt-2 z-10\">
+</div><div class=\"absolute top-0 left-0 w-full h-full bg-black opacity-50\" hx-post=\"/search\" hx-target=\"#search\" hx-swap=\"outerHTML\" hx-trigger=\"click\"></div>
+</div>
+<div id=\"players-table\"><nav><ul><li><a href=\"
+\">Prev</a></li><li><a href=\"
+\">Next</a></li></ul><input type=\"text\" name=\"search\" placeholder=\"Begin Typing To Search Users...\" hx-post=\"/players\" hx-trigger=\"input changed delay:500ms, keyup[key==&#39;Enter&#39;]\" hx-target=\"#players-table\" hx-indicator=\".htmx-indicator\" minlength=\"3\"><ul><li><button hx-post=\"/comparison\" hx-include=\"input[type=&#39;checkbox&#39;]\" hx-swap=\"transition:true\">Compare</button></li></ul></nav><table><thead class=\"sticky\"><tr><th hx-get=\"/players?sort=name\" hx-target=\"#players-table\">Name</th><th>Position</th><th>Form</th><th>Cost</th></tr></thead> <tbody>
+<tr><td><label name=\"player\" for=\"
+\"><input type=\"checkbox\" id=\"
+\" name=\"player\" value=\"
+\"> 
+</label></td><td>
+</td><td>
+</td><td>
+</td></tr>
+</tbody></table></div>
+<div class=\"grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4\">
+</div>
+<a href=\"
+\" class=\"bg-zinc-900 rounded-sm p-3 py-4 flex flex-col gap-2 items hover:bg-zinc-800 hover:cursor-pointer h-24\"><div class=\"flex gap-4 items-center\"><div class=\"h-12 w-12\"><img src=\"
+\" width=\"48\" height=\"48\"></div><div class=\"flex flex-col\"><h3>
+</h3><div class=\"flex gap-2 items-center\"><small class=\"cost-tag\">£
+m</small> <small>
+pts</small></div></div></div></a>

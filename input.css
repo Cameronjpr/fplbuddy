@@ -14,4 +14,21 @@
   h3 {
     @apply text-lg font-bold pb-1;
   }
+
+  .hero {
+    @apply text-3xl font-bold h-min w-min;
+    background: linear-gradient(0.25turn, #EF233C, #D80032);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  a {
+    @apply hover:underline;
+  }
+
+  button {
+    @apply px-3 py-1 rounded-md;
+    @apply bg-zinc-900 hover:bg-zinc-800;
+  }
 }
