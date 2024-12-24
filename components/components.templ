@@ -69,7 +69,7 @@ templ ErrorPage() {
 templ EntryPlayerCard(p core.EntryPlayer) {
 	<a class="w-1/5 flex" href={ templ.URL(fmt.Sprintf("/players/%v", strconv.Itoa(p.FplElementId))) }>
 		<div class="w-full text-center flex flex-col overflow-hidden items-center gap-1">
-			<img src={ fmt.Sprintf("/static/images/shirts/%s.png", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
+			<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
 			<div class="text-xs flex flex-col gap-1 items-center ">
 				<span class="font-bold truncate">{ p.Name }</span>
 				<p class="text-lg bg-green-100 rounded-full px-2">{ strconv.Itoa(p.GwScore) }</p>
@@ -186,7 +186,7 @@ templ PlayerGridCard(p core.Player) {
 	<a href={ templ.URL(fmt.Sprintf("/players/%v", strconv.Itoa(p.FplElementId))) } class="bg-zinc-800 rounded-sm p-2 py-4 flex flex-col gap-2 items hover:bg-zinc-900 hover:cursor-pointer">
 		<div>
 			<header class="flex gap-2 items-center">
-				<img src={ fmt.Sprintf("/static/images/shirts/%s.png", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
+				<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
 				<div class="flex flex-col">
 					<h3>{ p.Name }</h3>
 					<small class="cost-tag">£{ strconv.FormatFloat(p.NowCost, 'f', -1, 32) }m</small>

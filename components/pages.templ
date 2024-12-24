@@ -117,7 +117,7 @@ templ PlayerPage(p core.Player) {
 	@layout() {
 		<div>
 			<h1>{ p.Name }</h1>
-			<img src={ fmt.Sprintf("/static/images/shirts/%s.png", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
+			<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
 		</div>
 	}
 }

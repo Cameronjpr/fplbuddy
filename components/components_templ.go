@@ -257,7 +257,7 @@ func EntryPlayerCard(p core.EntryPlayer) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var11 string
-		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/static/images/shirts/%s.png", shared.GetCodeFromClubId(p.ClubId)))
+		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)))
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 72, Col: 93}
 		}
@@ -599,7 +599,7 @@ func PlayerGridCard(p core.Player) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var29 string
-		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/static/images/shirts/%s.png", shared.GetCodeFromClubId(p.ClubId)))
+		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)))
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/components.templ`, Line: 189, Col: 94}
 		}
