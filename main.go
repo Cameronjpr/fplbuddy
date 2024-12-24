@@ -32,6 +32,7 @@ func main() {
 		disableCacheInDevMode(
 			http.StripPrefix("/assets",
 				http.FileServer(http.Dir("assets")))))
+	r.Handle("/favicon.ico", disableCacheInDevMode(http.FileServer(http.Dir("static"))))
 	r.HandleFunc("/", withLogging(handlers.HandleHomePage))
 	r.HandleFunc("POST /search", withLogging(handlers.HandleSearchPlayers))
 	r.HandleFunc("GET /players", withLogging(handlers.HandlePlayersPage))
