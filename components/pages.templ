@@ -1,0 +1,131 @@
+package components
+
+import (
+	"fmt"
+	"github.com/cameronjpr/fplbuddy/core"
+	"github.com/cameronjpr/fplbuddy/shared"
+	"strconv"
+)
+
+templ layout() {
+	<html>
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<meta name="color-scheme" content="light dark"/>
+			<link rel="stylesheet" href="assets/styles.css"/>
+			<title>FPL Buddy</title>
+			<script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+		</head>
+		<body hx-boost="true" class="m-auto max-w-4xl p-4">
+			<header>
+				@PlayerSearchBar([]core.Player{})
+				<nav class="flex justify-between items-center">
+					<ul>
+						<li>
+							<a href="/" class="font-mono text-lg">FPL Buddy</a>
+							<p>
+								<small>power tools for managers</small>
+							</p>
+						</li>
+					</ul>
+					<ul class="flex gap-4">
+						<li>
+							<a class="secondary" href="/players">Players</a>
+						</li>
+						<li>
+							<a class="secondary" href="/team">Team </a>
+						</li>
+						<li>
+							<a class="secondary" href="/rank">Rank</a>
+						</li>
+						<li>
+							<a class="secondary" href="/fdr">FDR</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+			<main
+				id="main"
+				class="flex flex-col gap-4 pt-4"
+			>
+				{ children... }
+			</main>
+		</body>
+	</html>
+}
+
+templ HomePage(homepageData core.HomepageResponse) {
+	@layout() {
+		<div class="flex flex-col gap-4">
+			<div class="flex gap-4">
+				<button hx-get="/players/trending" hx-target="#main" hx-swap="outerHTML">Team</button>
+				<button hx-get="/players/trending" hx-target="#main" hx-swap="outerHTML">Team</button>
+			</div>
+			@PlayerGrid(homepageData.TrendingPlayers)
+			<h2>Fixtures</h2>
+		</div>
+	}
+}
+
+templ PlayersPage(playersResponse core.PlayersResponse) {
+	@layout() {
+		<div>
+			<h1>Players</h1>
+			@PlayersTable(playersResponse)
+		</div>
+	}
+}
+
+templ ComparisonPage(players []core.Player) {
+	@layout() {
+		<div>
+			<h1>Comparison</h1>
+			<div class="grid overflow-auto">
+				for _, p := range players {
+					<article class="card">
+						<header>
+							<h2>{ p.Name }</h2>
+						</header>
+						<p>Position: { strconv.Itoa(p.Position) }</p>
+						<p>Form: { strconv.FormatFloat(p.Form, 'f', -1, 32) }</p>
+						<p>Cost: { strconv.FormatFloat(p.NowCost, 'f', -1, 32) }</p>
+						<footer>
+							<details>
+								<summary>
+									Detailed stats
+								</summary>
+								Some stats!
+							</details>
+						</footer>
+					</article>
+				}
+			</div>
+		</div>
+	}
+}
+
+templ EntryPage(entry core.Entry) {
+	@layout() {
+		<div>
+			@TeamEntry(entry)
+		</div>
+	}
+}
+
+templ PlayerPage(p core.Player) {
+	@layout() {
+		<div>
+			<h1>{ p.Name }</h1>
+			<img src={ fmt.Sprintf("/static/images/shirts/%s.png", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
+		</div>
+	}
+}
+
+templ NotFoundPage() {
+	@layout() {
+		<div>
+			<h1>404 - Page Not Found</h1>
+		</div>
+	}
+}

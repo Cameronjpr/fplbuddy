@@ -1,0 +1,198 @@
+package components
+
+import (
+	"fmt"
+	"github.com/cameronjpr/fplbuddy/core"
+	"github.com/cameronjpr/fplbuddy/shared"
+	"strconv"
+)
+
+templ Test() {
+	<div class="flex flex-col gap-4 w-full bg-red-500">
+		<h2>TEST</h2>
+	</div>
+}
+
+templ TeamEntry(entry core.Entry) {
+	<div id="team-entry" class="flex flex-col gap-4 w-full max-w-2xl m-auto">
+		<div class="flex gap-4 items-center justify-between w-full">
+			<button hx-get={ fmt.Sprintf("/team/%v/refresh?gw=%v", entry.Id, entry.Gameweek-1) } hx-target="#team-entry" hx-swap="outerHTML">Previous</button>
+			<span class="font-bold text-lg">Gameweek { strconv.Itoa(entry.Gameweek) }</span>
+			<button hx-get={ fmt.Sprintf("/team/%v/refresh?gw=%v", entry.Id, entry.Gameweek+1) } hx-target="#team-entry" hx-swap="outerHTML">Next</button>
+		</div>
+		<div class="bg-green-600 border-4 border-green-700 py-4 rounded-xl w-full">
+			<div class="px-4">
+				<div class="flex items-center justify-center border-4 border-green-200 w-16 h-16 relative top-0 right-0 bg-white rounded-full">
+					<span class="font-bold">{ strconv.Itoa(entry.Total) }</span><span class="text-xs">pts</span>
+				</div>
+			</div>
+			<div class="flex flex-col gap-4 w-full">
+				<ul class="flex justify-center w-full gap-4">
+					for _, p := range entry.Goalkeepers {
+						@EntryPlayerCard(p)
+					}
+				</ul>
+				<ul class="flex justify-center w-full gap-4">
+					for _, p := range entry.Defenders {
+						@EntryPlayerCard(p)
+					}
+				</ul>
+				<ul class="flex justify-center w-full gap-4">
+					for _, p := range entry.Midfielders {
+						@EntryPlayerCard(p)
+					}
+				</ul>
+				<ul class="flex justify-center w-full gap-4">
+					for _, p := range entry.Forwards {
+						@EntryPlayerCard(p)
+					}
+				</ul>
+				<ul class="flex justify-center w-full gap-4 border-t-2 pt-4">
+					for _, p := range entry.Bench {
+						@EntryPlayerCard(p)
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+}
+
+templ ErrorPage() {
+	@layout() {
+		<div class="flex flex-col gap-16">
+			<h1 class="text-4xl font-bold">Error</h1>
+			<p>Something went wrong</p>
+		</div>
+	}
+}
+
+templ EntryPlayerCard(p core.EntryPlayer) {
+	<a class="w-1/5 flex" href={ templ.URL(fmt.Sprintf("/players/%v", strconv.Itoa(p.FplElementId))) }>
+		<div class="w-full text-center flex flex-col overflow-hidden items-center gap-1">
+			<img src={ fmt.Sprintf("/static/images/shirts/%s.png", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
+			<div class="text-xs flex flex-col gap-1 items-center ">
+				<span class="font-bold truncate">{ p.Name }</span>
+				<p class="text-lg bg-green-100 rounded-full px-2">{ strconv.Itoa(p.GwScore) }</p>
+			</div>
+		</div>
+	</a>
+}
+
+templ EntrySummary() {
+	<div class="flex flex-col gap-4 w-full">
+		<h2>Eleventy Stupid</h2>
+	</div>
+}
+
+templ PlayerSearchBar(results []core.Player) {
+	<div
+		id="search"
+		class="flex flex-col place-content-center"
+	>
+		<input
+			id="search-input"
+			name="search"
+			type="search"
+			placeholder="Search"
+			class="p-2 rounded-lg border-2 border-gray-300 w-72 sm:w-96"
+			hx-post="/search"
+			hx-swap="outerHTML"
+			hx-target="#search"
+			hx-trigger="keyup changed delay:500ms"
+			minlength="3"
+		/>
+		<div class="htmx-indicator"></div>
+		if len(results) > 0 {
+			<div class="flex flex-col p-1 gap-2 absolute w-72 bg-zinc-900 sm:w-96 top-16 pt-2 z-10">
+				for _, p := range results {
+					@PlayerGridCard(p)
+				}
+			</div>
+			<div
+				class="absolute top-0 left-0 w-full h-full bg-black opacity-50"
+				hx-post="/search"
+				hx-target="#search"
+				hx-swap="outerHTML"
+				hx-trigger="click"
+			></div>
+		}
+	</div>
+}
+
+templ PlayersTable(playersResponse core.PlayersResponse) {
+	<div id="players-table">
+		<nav>
+			<ul>
+				<li>
+					<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Prev)) }>Prev</a>
+				</li>
+				<li>
+					<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Next)) }>Next</a>
+				</li>
+			</ul>
+			<input
+				type="text"
+				name="search"
+				placeholder="Begin Typing To Search Users..."
+				hx-post="/players"
+				hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
+				hx-target="#players-table"
+				hx-indicator=".htmx-indicator"
+				minlength="3"
+			/>
+			<ul>
+				<li>
+					<button hx-post="/comparison" hx-include="input[type='checkbox']" hx-swap="transition:true">Compare</button>
+				</li>
+			</ul>
+		</nav>
+		<table>
+			<thead class="sticky">
+				<tr>
+					<th hx-get="/players?sort=name" hx-target="#players-table">Name</th>
+					<th>Position</th>
+					<th>Form</th>
+					<th>Cost</th>
+				</tr>
+			</thead>
+			<tbody>
+				for _, p := range playersResponse.Players {
+					<tr>
+						<td>
+							<label name="player" for={ strconv.Itoa(p.FplElementId) }>
+								<input type="checkbox" id={ strconv.Itoa(p.FplElementId) } name="player" value={ strconv.Itoa(p.FplElementId) }/>
+								{ p.Name }
+							</label>
+						</td>
+						<td>{ strconv.Itoa(p.Position) }</td>
+						<td>{ strconv.FormatFloat(p.Form, 'f', -1, 32) }</td>
+						<td>{ strconv.FormatFloat(p.NowCost, 'f', -1, 32) }</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}
+
+templ PlayerGrid(players []core.Player) {
+	<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+		for _, p := range players {
+			@PlayerGridCard(p)
+		}
+	</div>
+}
+
+templ PlayerGridCard(p core.Player) {
+	<a href={ templ.URL(fmt.Sprintf("/players/%v", strconv.Itoa(p.FplElementId))) } class="bg-zinc-800 rounded-sm p-2 py-4 flex flex-col gap-2 items hover:bg-zinc-900 hover:cursor-pointer">
+		<div>
+			<header class="flex gap-2 items-center">
+				<img src={ fmt.Sprintf("/static/images/shirts/%s.png", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
+				<div class="flex flex-col">
+					<h3>{ p.Name }</h3>
+					<small class="cost-tag">£{ strconv.FormatFloat(p.NowCost, 'f', -1, 32) }m</small>
+				</div>
+				<small>{ strconv.Itoa(p.GwScore) }pts</small>
+			</header>
+		</div>
+	</a>
+}

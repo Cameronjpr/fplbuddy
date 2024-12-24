@@ -1,0 +1,6 @@
+version: '3.7'
+services:
+  fplbuddy:
+    image: fplbuddy:latest
+    env_file:
+      - ./.env
