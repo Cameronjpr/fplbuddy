@@ -5,6 +5,7 @@ import (
 	"github.com/cameronjpr/fplbuddy/core"
 	"github.com/cameronjpr/fplbuddy/shared"
 	"strconv"
+	"time"
 )
 
 templ layout() {
@@ -14,11 +15,11 @@ templ layout() {
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<meta name="color-scheme" content="light dark"/>
-			<link rel="stylesheet" href="assets/styles.css"/>
+			<link rel="stylesheet" href="/assets/styles.css"/>
 			<title>FPL Buddy</title>
 			<script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
 		</head>
-		<body class="m-auto max-w-4xl p-4">
+		<body class="m-auto max-w-4xl p-4 bg-zinc-950 text-zinc-100">
 			<header>
 				<nav class="flex flex-col sm:flex-row gap-4 justify-between items-center">
 					<div class="flex flex-col sm:flex-row gap-2 items-center justify-between w-full">
@@ -42,7 +43,7 @@ templ layout() {
 							</li>
 						</ul>
 					</div>
-					<div class="flex justify-end w-full">
+					<div class="flex justify-center sm:justify-end w-full">
 						@PlayerSearchBar([]core.Player{})
 					</div>
 				</nav>
@@ -76,18 +77,10 @@ templ HomePage(homepageData core.HomepageResponse) {
 	}
 }
 
-templ PlayersPage(playersResponse core.PlayersResponse) {
+templ PlayersPage(playersResponse core.PlayersResponse, sortOptions map[string]string) {
 	@layout() {
 		<div class="flex flex-col gap-4">
 			<nav class="flex gap-2 items-center justify-between w-full">
-				// <ul>
-				// 	<li>
-				// 		<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Prev)) }>Prev</a>
-				// 	</li>
-				// 	<li>
-				// 		<a href={ templ.SafeURL(fmt.Sprintf("/players?skip=%v", playersResponse.Next)) }>Next</a>
-				// 	</li>
-				// </ul>
 				<div class="flex flex-col sm:flex-row gap-4 items-center w-full">
 					<input
 						type="text"
@@ -109,7 +102,7 @@ templ PlayersPage(playersResponse core.PlayersResponse) {
 				</div>
 				<button class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2" hx-post="/comparison" hx-include="input[type='checkbox']:checked" hx-swap="transition:true">Compare</button>
 			</nav>
-			@PlayersTable(playersResponse)
+			@PlayersTable(playersResponse, sortOptions)
 		</div>
 	}
 }
@@ -139,6 +132,7 @@ templ PlayerPage(p core.Player) {
 	@layout() {
 		<div>
 			<h1>{ p.Name }</h1>
+			<p>Last updated at { p.UpdatedAt.Format(time.RFC822) } </p>
 			<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
 		</div>
 	}

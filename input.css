@@ -90,6 +90,7 @@
   table thead tr th button {
     @apply w-full;
     @apply cursor-ns-resize;
+    @apply text-left;
   }
 
   table tr {

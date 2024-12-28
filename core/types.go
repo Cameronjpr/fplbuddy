@@ -1,20 +1,24 @@
 package core
 
+import "time"
+
 type Group struct {
 	Name  string
 	Teams []Team
 }
 
 type Player struct {
-	Id           int     `json:"id"`
-	FplElementId int     `json:"fpl_element_id"`
-	Name         string  `json:"name"`
-	Nickname     string  `json:"nickname"`
-	Form         float64 `json:"form"`
-	NowCost      float64 `json:"now_cost"`
-	Position     int     `json:"position"`
-	GwScore      int     `json:"gw_score"`
-	ClubId       int     `json:"club_id"`
+	CreatedAt    *time.Time `json:"created_at"`
+	UpdatedAt    *time.Time `json:"updated_at"`
+	Id           int        `json:"id"`
+	FplElementId int        `json:"fpl_element_id"`
+	Name         string     `json:"name"`
+	Nickname     string     `json:"nickname"`
+	Form         float64    `json:"form"`
+	NowCost      float64    `json:"now_cost"`
+	Position     int        `json:"position"`
+	GwScore      int        `json:"gw_score"`
+	ClubId       int        `json:"club_id"`
 }
 
 type EntryPlayer struct {

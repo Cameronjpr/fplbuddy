@@ -23,7 +23,7 @@ func handleSearchPlayers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	players, err := lib.GetPlayers(-1, -1, "", "")
+	players, err := lib.GetPlayers(-1, -1, "", "", "")
 
 	if err != nil {
 		fmt.Println("error fetching players", err)
@@ -31,7 +31,14 @@ func handleSearchPlayers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	component := components.PlayersTable(players)
+	sortOptions := map[string]string{
+		"name":     "/players?sort=name&dir=asc",
+		"form":     "/players?sort=form&dir=asc",
+		"position": "/players?sort=position&dir=asc",
+		"now_cost": "/players?sort=now_cost&dir=asc",
+	}
+
+	component := components.PlayersTable(players, sortOptions)
 	component.Render(r.Context(), w)
 }
 

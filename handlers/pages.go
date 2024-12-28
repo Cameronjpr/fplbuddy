@@ -87,6 +87,7 @@ func HandlePlayersPage(w http.ResponseWriter, r *http.Request) {
 	rawLimit := r.URL.Query().Get("limit")
 	search := r.URL.Query().Get("search")
 	sort := r.URL.Query().Get("sort")
+	dir := r.URL.Query().Get("dir")
 
 	skip, err := strconv.Atoi(rawSkip)
 	if err != nil {
@@ -100,18 +101,31 @@ func HandlePlayersPage(w http.ResponseWriter, r *http.Request) {
 		limit = 25
 	}
 
-	res, err := lib.GetPlayers(skip, limit, search, sort)
+	res, err := lib.GetPlayers(skip, limit, search, sort, dir)
 
 	if err != nil {
 		fmt.Println("error fetching players", err)
 		http.Error(w, "error fetching players", http.StatusInternalServerError)
 	}
 
+	sortOptions := map[string]string{
+		"name":     "/players?sort=name",
+		"form":     "/players?sort=form",
+		"position": "/players?sort=position",
+		"now_cost": "/players?sort=now_cost",
+	}
+
+	newDir := "asc"
+	if dir == "asc" || dir == "" {
+		newDir = "desc"
+	}
+	sortOptions[sort] += fmt.Sprintf("&dir=%s", newDir)
+
 	if r.Header.Get("HX-Request") == "true" {
-		component := components.PlayersTable(res)
+		component := components.PlayersTable(res, sortOptions)
 		component.Render(r.Context(), w)
 	} else {
-		component := components.PlayersPage(res)
+		component := components.PlayersPage(res, sortOptions)
 		component.Render(r.Context(), w)
 	}
 }

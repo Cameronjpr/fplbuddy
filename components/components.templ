@@ -119,15 +119,15 @@ templ PlayerSearchBar(results []core.Player) {
 	</div>
 }
 
-templ PlayersTable(playersResponse core.PlayersResponse) {
+templ PlayersTable(playersResponse core.PlayersResponse, sortOptions map[string]string) {
 	<div id="players-table" class="flex flex-col gap-4">
 		<table class="w-full">
 			<thead class="sticky top-0">
-				<tr>
-					<th><button hx-get="/players?sort=name" hx-target="#players-table">Name</button></th>
-					<th>Position</th>
-					<th>Form</th>
-					<th>Cost</th>
+				<tr class="text-left">
+					<th><button hx-get={ sortOptions["name"] } hx-target="#players-table">Name</button></th>
+					<th><button hx-get={ sortOptions["position"] } hx-target="#players-table">Position</button></th>
+					<th><button hx-get={ sortOptions["form"] } hx-target="#players-table">Form</button></th>
+					<th><button hx-get={ sortOptions["now_cost"] } hx-target="#players-table">Cost</button></th>
 				</tr>
 			</thead>
 			<tbody>
