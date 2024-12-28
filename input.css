@@ -81,30 +81,67 @@
     @apply sticky top-0;
   }
 
-  table thead th {
+  th {
     @apply bg-zinc-900;
     @apply text-left;
     @apply px-2 py-1;
+  }
+
+  td {
+    @apply px-2;
+    @apply flex items-center;
   }
 
   table thead tr th button {
     @apply w-full;
     @apply cursor-ns-resize;
     @apply text-left;
+    @apply p-0;
+  }
+
+  td * {
+    @apply py-2;
   }
 
   table tr {
     @apply border-b border-zinc-800;
-    @apply px-2;
     @apply hover:bg-zinc-800;
-  }
-
-  table td * {
-    @apply p-2;
   }
 
   table tr:nth-child(odd) {
     @apply bg-zinc-900;
     @apply hover:bg-zinc-800;
   }
+}
+
+/* Fixture Difficulty Rating */
+
+[data-difficulty="1"] {
+  @apply bg-green-500;
+  @apply text-green-950;
+}
+
+[data-difficulty="2"] {
+  @apply bg-green-400;
+  @apply text-green-950;
+}
+
+[data-difficulty="3"] {
+  @apply bg-yellow-400;
+  @apply text-yellow-950;
+}
+
+[data-difficulty="4"] {
+  @apply bg-red-400;
+  @apply text-red-950;
+}
+
+[data-difficulty="5"] {
+  @apply bg-red-500;
+  @apply text-red-950;
+}
+
+[data-difficulty="6"] {
+  @apply bg-red-600;
+  @apply text-red-950;
 }

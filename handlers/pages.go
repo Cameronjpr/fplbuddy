@@ -158,3 +158,16 @@ func HandleGetEntryPage(w http.ResponseWriter, r *http.Request) {
 	component := components.EntryPage(entry)
 	component.Render(r.Context(), w)
 }
+
+func HandleFDRPage(w http.ResponseWriter, r *http.Request) {
+	fdr := []core.FDREntry{
+		{OpponentId: 1, Difficulty: 2},
+		{OpponentId: 2, Difficulty: 3},
+		{OpponentId: 3, Difficulty: 4},
+		{OpponentId: 4, Difficulty: 1},
+		{OpponentId: 5, Difficulty: 2},
+	}
+
+	component := components.FDRPage(fdr)
+	component.Render(r.Context(), w)
+}

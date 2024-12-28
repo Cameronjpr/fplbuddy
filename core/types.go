@@ -65,3 +65,17 @@ type PlayersResponse struct {
 	Next    int      `json:"next"`
 	Prev    int      `json:"prev"`
 }
+
+type Fixture struct {
+	Event           int
+	KickoffTime     time.Time
+	TeamH           int `json:"team_h"`
+	TeamA           int `json:"team_a"`
+	TeamHDifficulty int `json:"team_h_difficulty"`
+	TeamADifficulty int `json:"team_a_difficulty"`
+}
+
+type FDREntry struct {
+	OpponentId int
+	Difficulty int
+}

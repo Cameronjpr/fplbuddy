@@ -123,7 +123,7 @@ templ PlayersTable(playersResponse core.PlayersResponse, sortOptions map[string]
 	<div id="players-table" class="flex flex-col gap-4">
 		<table class="w-full">
 			<thead class="sticky top-0">
-				<tr class="text-left">
+				<tr class="text-left grid grid-cols-4">
 					<th><button hx-get={ sortOptions["name"] } hx-target="#players-table">Name</button></th>
 					<th><button hx-get={ sortOptions["position"] } hx-target="#players-table">Position</button></th>
 					<th><button hx-get={ sortOptions["form"] } hx-target="#players-table">Form</button></th>
@@ -132,7 +132,7 @@ templ PlayersTable(playersResponse core.PlayersResponse, sortOptions map[string]
 			</thead>
 			<tbody>
 				for _, p := range playersResponse.Players {
-					<tr>
+					<tr class="text-left grid grid-cols-4">
 						<td>
 							<label name="player" for={ strconv.Itoa(p.FplElementId) }>
 								<input type="checkbox" id={ strconv.Itoa(p.FplElementId) } name="player" value={ strconv.Itoa(p.FplElementId) }/>
@@ -181,4 +181,17 @@ templ PlayerGridCard(p core.Player) {
 			</div>
 		</div>
 	</a>
+}
+
+templ FDRSchedule(fdr []core.FDREntry) {
+	<div class="flex flex-col gap-4">
+		<h2>Next 5 Gameweeks</h2>
+		<div class="flex gap-4">
+			for _, f := range fdr {
+				<div class="flex flex-col gap-2 p-2 rounded-sm font-semibold text-lg min-w-16 text-center" data-difficulty={ strconv.Itoa(f.Difficulty) }>
+					<p class="uppercase">{ shared.GetCodeFromClubId(f.OpponentId) }</p>
+				</div>
+			}
+		</div>
+	</div>
 }

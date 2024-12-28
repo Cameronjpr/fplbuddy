@@ -39,7 +39,7 @@ templ layout() {
 								<a class="disabled" disabled href="/rank">Rank</a>
 							</li>
 							<li>
-								<a class="disabled" disabled href="/fdr">FDR</a>
+								<a href="/fdr">FDR</a>
 							</li>
 						</ul>
 					</div>
@@ -62,6 +62,7 @@ templ HomePage(homepageData core.HomepageResponse) {
 	@layout() {
 		<div class="flex flex-col gap-4">
 			<h2>Players</h2>
+			<a href="/players" class="text-sm">View all players</a>
 			<div class="flex overflow-scroll gap-2 bg-zinc-900 rounded-md p-2 px-4">
 				<button class="text-lg" hx-get="/players/trending" hx-target="#main" hx-swap="outerHTML">🔥 Trending</button>
 				<button class="text-lg" hx-get="/players/risers" hx-target="#main" hx-swap="outerHTML">⬆ Risers</button>
@@ -128,12 +129,26 @@ templ EntryPage(entry core.Entry) {
 	}
 }
 
-templ PlayerPage(p core.Player) {
+templ PlayerPage(p core.Player, fdr []core.FDREntry) {
+	@layout() {
+		<div class="flex flex-col gap-4">
+			<h1>{ p.Name }</h1>
+			<div class="flex gap-8">
+				<div class="w-24">
+					<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="96" height="96"/>
+				</div>
+				@FDRSchedule(fdr)
+			</div>
+			<p>Last updated at { p.UpdatedAt.Format(time.RFC822) } </p>
+		</div>
+	}
+}
+
+templ FDRPage(fdr []core.FDREntry) {
 	@layout() {
 		<div>
-			<h1>{ p.Name }</h1>
-			<p>Last updated at { p.UpdatedAt.Format(time.RFC822) } </p>
-			<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="48" height="48"/>
+			<h1>Fixture Difficulty Rating</h1>
+			@FDRSchedule(fdr)
 		</div>
 	}
 }

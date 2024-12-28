@@ -20,12 +20,12 @@
 <div class=\"flex flex-col p-1 gap-2 absolute w-72 bg-zinc-900 sm:w-96 top-16 pt-2 z-10\">
 </div><div class=\"absolute top-0 left-0 w-full h-full bg-black opacity-50\" hx-post=\"/search\" hx-target=\"#search\" hx-swap=\"outerHTML\" hx-trigger=\"click\"></div>
 </div>
-<div id=\"players-table\" class=\"flex flex-col gap-4\"><table class=\"w-full\"><thead class=\"sticky top-0\"><tr class=\"text-left\"><th><button hx-get=\"
+<div id=\"players-table\" class=\"flex flex-col gap-4\"><table class=\"w-full\"><thead class=\"sticky top-0\"><tr class=\"text-left grid grid-cols-4\"><th><button hx-get=\"
 \" hx-target=\"#players-table\">Name</button></th><th><button hx-get=\"
 \" hx-target=\"#players-table\">Position</button></th><th><button hx-get=\"
 \" hx-target=\"#players-table\">Form</button></th><th><button hx-get=\"
 \" hx-target=\"#players-table\">Cost</button></th></tr></thead> <tbody>
-<tr><td><label name=\"player\" for=\"
+<tr class=\"text-left grid grid-cols-4\"><td><label name=\"player\" for=\"
 \"><input type=\"checkbox\" id=\"
 \" name=\"player\" value=\"
 \"> 
@@ -44,3 +44,8 @@
 </h3><div class=\"flex gap-2 items-center\"><small class=\"cost-tag\">£
 m</small> <small>
 pts</small></div></div></div></a>
+<div class=\"flex flex-col gap-4\"><h2>Next 5 Gameweeks</h2><div class=\"flex gap-4\">
+<div class=\"flex flex-col gap-2 p-2 rounded-sm font-semibold text-lg min-w-16 text-center\" data-difficulty=\"
+\"><p class=\"uppercase\">
+</p></div>
+</div></div>
