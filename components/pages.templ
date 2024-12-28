@@ -107,7 +107,7 @@ templ PlayersPage(playersResponse core.PlayersResponse) {
 						}
 					</select>
 				</div>
-				<button class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2" hx-post="/comparison" hx-include="input[type='checkbox'][checked]" hx-swap="transition:true">Compare</button>
+				<button class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2" hx-post="/comparison" hx-include="input[type='checkbox']:checked" hx-swap="transition:true">Compare</button>
 			</nav>
 			@PlayersTable(playersResponse)
 		</div>

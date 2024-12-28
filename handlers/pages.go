@@ -1,9 +1,7 @@
 package handlers
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"strconv"
 	"sync"
@@ -64,35 +62,16 @@ func HandleComparisonPage(w http.ResponseWriter, r *http.Request) {
 		wg.Add(1)
 		go func(id string) {
 			defer wg.Done()
-			fmt.Println("fetching player", id)
-			resp, err := http.Get(fmt.Sprintf("http://localhost:8000/players/%v", id))
-
+			playerId, err := strconv.Atoi(id)
 			if err != nil {
-				fmt.Println("error fetching players", err)
-				http.Error(w, "error fetching players", http.StatusInternalServerError)
-				return
+				fmt.Println("error converting player id to int", err)
+			}
+			p, err := lib.GetPlayer(playerId)
+			if err != nil {
+				fmt.Println("error fetching player", err)
 			}
 
-			player := core.Player{}
-
-			defer resp.Body.Close()
-			body, err := io.ReadAll(resp.Body)
-
-			if err != nil {
-				fmt.Println("error reading body", err)
-				http.Error(w, "internal server error", http.StatusInternalServerError)
-				return
-			}
-
-			err = json.Unmarshal(body, &player)
-
-			if err != nil {
-				fmt.Println("error unmarshalling json", err)
-				http.Error(w, "internal server error", http.StatusInternalServerError)
-				return
-			}
-
-			players = append(players, player)
+			players = append(players, p)
 		}(value)
 
 	}

@@ -7,7 +7,7 @@
 <option value=\"
 \">
 </option>
-</select></div><button class=\"bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2\" hx-post=\"/comparison\" hx-include=\"input[type=&#39;checkbox&#39;][checked]\" hx-swap=\"transition:true\">Compare</button></nav>
+</select></div><button class=\"bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2\" hx-post=\"/comparison\" hx-include=\"input[type=&#39;checkbox&#39;]:checked\" hx-swap=\"transition:true\">Compare</button></nav>
 </div>
 <div><h1>Comparison</h1><div class=\"flex flex-col sm:flex-row overflow-scroll gap-4\">
 </div></div>

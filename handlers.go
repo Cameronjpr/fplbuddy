@@ -94,6 +94,8 @@ func handlePostComparison(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("Error parsing form, %v\n", err)
 	}
 
+	fmt.Println("r.PostForm", r.PostForm)
+
 	query := r.URL.Query()
 
 	for key, values := range r.PostForm {
@@ -105,15 +107,14 @@ func handlePostComparison(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(query["id"]) < 2 {
+		fmt.Println("At least two players are required for comparison")
 		http.Error(w, "At least two players are required for comparison", http.StatusBadRequest)
-		return
 	}
 
-	fmt.Println("handling post comparison", query)
+	fmt.Println("handling post comparison with query: ", query)
 
 	http.Header.Add(w.Header(), "Location", fmt.Sprintf("/comparison?%s", query.Encode()))
 	http.Header.Add(w.Header(), "HX-Redirect", fmt.Sprintf("/comparison?%s", query.Encode()))
-
 }
 
 func handleGetPlayer(w http.ResponseWriter, r *http.Request) {

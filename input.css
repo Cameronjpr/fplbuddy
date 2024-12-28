@@ -34,29 +34,29 @@
 
   button {
     @apply px-3 py-1 rounded-md;
-    @apply bg-zinc-900 hover:bg-zinc-800;
+    @apply bg-zinc-900;
   }
 
   select {
     @apply h-10;
     @apply px-3 py-1 rounded-md;
-    @apply bg-zinc-900 hover:bg-zinc-800;
+    @apply bg-zinc-900;
   }
 
   select option {
     @apply px-3 py-1 rounded-md;
-    @apply bg-zinc-900 hover:bg-zinc-800;
+    @apply bg-zinc-900;
   }
 
   input {
     @apply h-10;
     @apply px-3 py-1 rounded-md;
-    @apply bg-zinc-900 hover:bg-zinc-800;
+    @apply bg-zinc-900;
   }
 
   input[type="search"] {
     @apply px-3 py-1 rounded-md;
-    @apply bg-zinc-900 hover:bg-zinc-800;
+    @apply bg-zinc-900;
     @apply w-full sm:w-72;
   }
 
@@ -94,12 +94,12 @@
 
   table tr {
     @apply border-b border-zinc-800;
-    @apply px-2 py-1;
+    @apply px-2;
     @apply hover:bg-zinc-800;
   }
 
-  table td {
-    @apply px-2 py-1;
+  table td * {
+    @apply p-2;
   }
 
   table tr:nth-child(odd) {

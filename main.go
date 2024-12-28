@@ -42,7 +42,7 @@ func main() {
 	r.HandleFunc("GET /team/{teamId}", withLogging(handlers.HandleGetEntryPage))
 	r.HandleFunc("GET /team/{teamId}/refresh", withLogging(handlers.HandleGetEntryView))
 	r.HandleFunc("GET /comparison", withLogging(handlers.HandleComparisonPage))
-	r.HandleFunc("POST /comparison", handlePostComparison)
+	r.HandleFunc("POST /comparison", withLogging(handlePostComparison))
 
 	port := readPort()
 
