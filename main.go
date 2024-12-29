@@ -38,6 +38,7 @@ func main() {
 	r.HandleFunc("GET /players", withLogging(handlers.HandlePlayersPage))
 	r.HandleFunc("GET /players/{playerId}", handleGetPlayer)
 	r.HandleFunc("POST /players", handleSearchPlayers)
+	r.HandleFunc("GET /fixtures", withLogging(handlers.HandleFixturesPage))
 	r.HandleFunc("POST /team", handlePostTeam)
 	r.HandleFunc("GET /team/{teamId}", withLogging(handlers.HandleGetEntryPage))
 	r.HandleFunc("GET /team/{teamId}/refresh", withLogging(handlers.HandleGetEntryView))

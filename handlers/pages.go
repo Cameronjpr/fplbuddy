@@ -160,14 +160,25 @@ func HandleGetEntryPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleFDRPage(w http.ResponseWriter, r *http.Request) {
-	fdr := []core.FDREntry{
-		{OpponentId: 1, Difficulty: 2},
-		{OpponentId: 2, Difficulty: 3},
-		{OpponentId: 3, Difficulty: 4},
-		{OpponentId: 4, Difficulty: 1},
-		{OpponentId: 5, Difficulty: 2},
+	schedule, err := lib.GetFDRSchedule()
+
+	if err != nil {
+		fmt.Println("error fetching fdr schedule", err)
+		http.Error(w, "error fetching fdr schedule", http.StatusInternalServerError)
 	}
 
-	component := components.FDRPage(fdr)
+	component := components.FDRPage(schedule)
+	component.Render(r.Context(), w)
+}
+
+func HandleFixturesPage(w http.ResponseWriter, r *http.Request) {
+	fixtures, err := lib.GetFixtures()
+
+	if err != nil {
+		fmt.Println("error fetching fixtures", err)
+		http.Error(w, "error fetching fixtures", http.StatusInternalServerError)
+	}
+
+	component := components.FixturesPage(fixtures)
 	component.Render(r.Context(), w)
 }

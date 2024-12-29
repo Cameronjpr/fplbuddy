@@ -9,9 +9,8 @@ import (
 )
 
 templ layout() {
-	<html>
+	<html lang="en">
 		<head>
-			<meta lang="en"/>
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<meta name="color-scheme" content="light dark"/>
@@ -33,7 +32,7 @@ templ layout() {
 								<a href="/players">Players</a>
 							</li>
 							<li>
-								<a class="disabled" disabled href="/team">Team </a>
+								<a href="/fixtures">Fixtures</a>
 							</li>
 							<li>
 								<a class="disabled" disabled href="/rank">Rank</a>
@@ -43,14 +42,14 @@ templ layout() {
 							</li>
 						</ul>
 					</div>
-					<div class="flex justify-center sm:justify-end w-full">
+					<div class="flex justify-stretch sm:justify-end w-full">
 						@PlayerSearchBar([]core.Player{})
 					</div>
 				</nav>
 			</header>
 			<main
 				id="main"
-				class="flex flex-col gap-4 pt-4"
+				class="flex flex-col gap-4 pt-8"
 			>
 				{ children... }
 			</main>
@@ -129,26 +128,46 @@ templ EntryPage(entry core.Entry) {
 	}
 }
 
-templ PlayerPage(p core.Player, fdr []core.FDREntry) {
+templ PlayerPage(p core.Player, fdr core.FDRSchedule) {
 	@layout() {
 		<div class="flex flex-col gap-4">
-			<h1>{ p.Name }</h1>
-			<div class="flex gap-8">
+			<div class="flex flex-col sm:flex-row gap-8 justify-center sm:justify-start items-center">
 				<div class="w-24">
 					<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="96" height="96"/>
 				</div>
+				<h1>{ p.Name }</h1>
+			</div>
+			<hr/>
+			<div class="flex flex-col gap-8">
+				@PlayerKeyStats(p)
 				@FDRSchedule(fdr)
 			</div>
-			<p>Last updated at { p.UpdatedAt.Format(time.RFC822) } </p>
+		</div>
+		<small class="text-zinc-400">Last updated at { p.UpdatedAt.Format(time.RFC822) } </small>
+	}
+}
+
+templ FDRPage(schedule core.FDRSchedule) {
+	@layout() {
+		<div>
+			<h1>Fixture Difficulty Rating</h1>
+			@FDRSchedule(schedule)
 		</div>
 	}
 }
 
-templ FDRPage(fdr []core.FDREntry) {
+templ FixturesPage(fixtures []core.Fixture) {
 	@layout() {
 		<div>
-			<h1>Fixture Difficulty Rating</h1>
-			@FDRSchedule(fdr)
+			<h1>Fixtures</h1>
+			<div class="flex flex-col gap-4">
+				for _, f := range fixtures {
+					<div class="flex flex-col gap-2">
+						<h2>{ shared.GetCodeFromClubId(f.TeamH) } vs { shared.GetCodeFromClubId(f.TeamA) }</h2>
+						<small>{ f.KickoffTime.Format("Mon 2 Jan 2006 15:04") }</small>
+					</div>
+				}
+			</div>
 		</div>
 	}
 }

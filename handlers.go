@@ -146,12 +146,11 @@ func handleGetPlayer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fdr := []core.FDREntry{
-		{OpponentId: 1, Difficulty: 2},
-		{OpponentId: 2, Difficulty: 3},
-		{OpponentId: 3, Difficulty: 4},
-		{OpponentId: 4, Difficulty: 1},
-		{OpponentId: 5, Difficulty: 2},
+	fdr, err := lib.GetFDRSchedule()
+	if err != nil {
+		fmt.Println("error fetching fdr", err)
+		http.Error(w, "error fetching fdr", http.StatusInternalServerError)
+		return
 	}
 
 	http.Header.Add(w.Header(), "Cache-Control", "public, max-age=3600")

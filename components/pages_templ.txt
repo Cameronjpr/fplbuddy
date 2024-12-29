@@ -1,5 +1,5 @@
-<html><head><meta lang=\"en\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"color-scheme\" content=\"light dark\"><link rel=\"stylesheet\" href=\"/assets/styles.css\"><title>FPL Buddy</title><script src=\"https://unpkg.com/htmx.org@1.9.2\" integrity=\"sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h\" crossorigin=\"anonymous\"></script></head><body class=\"m-auto max-w-4xl p-4 bg-zinc-950 text-zinc-100\"><header><nav class=\"flex flex-col sm:flex-row gap-4 justify-between items-center\"><div class=\"flex flex-col sm:flex-row gap-2 items-center justify-between w-full\"><ul><li><a href=\"/\" class=\"hero\">🛠️ FPL Buddy</a></li></ul><ul class=\"flex gap-4\"><li><a href=\"/players\">Players</a></li><li><a class=\"disabled\" disabled href=\"/team\">Team </a></li><li><a class=\"disabled\" disabled href=\"/rank\">Rank</a></li><li><a href=\"/fdr\">FDR</a></li></ul></div><div class=\"flex justify-center sm:justify-end w-full\">
-</div></nav></header><main id=\"main\" class=\"flex flex-col gap-4 pt-4\">
+<html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"color-scheme\" content=\"light dark\"><link rel=\"stylesheet\" href=\"/assets/styles.css\"><title>FPL Buddy</title><script src=\"https://unpkg.com/htmx.org@1.9.2\" integrity=\"sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h\" crossorigin=\"anonymous\"></script></head><body class=\"m-auto max-w-4xl p-4 bg-zinc-950 text-zinc-100\"><header><nav class=\"flex flex-col sm:flex-row gap-4 justify-between items-center\"><div class=\"flex flex-col sm:flex-row gap-2 items-center justify-between w-full\"><ul><li><a href=\"/\" class=\"hero\">🛠️ FPL Buddy</a></li></ul><ul class=\"flex gap-4\"><li><a href=\"/players\">Players</a></li><li><a href=\"/fixtures\">Fixtures</a></li><li><a class=\"disabled\" disabled href=\"/rank\">Rank</a></li><li><a href=\"/fdr\">FDR</a></li></ul></div><div class=\"flex justify-stretch sm:justify-end w-full\">
+</div></nav></header><main id=\"main\" class=\"flex flex-col gap-4 pt-8\">
 </main></body></html>
 <div class=\"flex flex-col gap-4\"><h2>Players</h2><a href=\"/players\" class=\"text-sm\">View all players</a><div class=\"flex overflow-scroll gap-2 bg-zinc-900 rounded-md p-2 px-4\"><button class=\"text-lg\" hx-get=\"/players/trending\" hx-target=\"#main\" hx-swap=\"outerHTML\">🔥 Trending</button> <button class=\"text-lg\" hx-get=\"/players/risers\" hx-target=\"#main\" hx-swap=\"outerHTML\">⬆ Risers</button> <button class=\"text-lg\" hx-get=\"/players/fallers\" hx-target=\"#main\" hx-swap=\"outerHTML\">⬇ Fallers</button> <button class=\"text-lg\" hx-get=\"/players?position=1\" hx-target=\"#main\" hx-swap=\"outerHTML\">🧤 Goalkeepers</button> <button class=\"text-lg\" hx-get=\"/players?position=2\" hx-target=\"#main\" hx-swap=\"outerHTML\">🙅 Defenders</button> <button class=\"text-lg\" hx-get=\"/players?position=3\" hx-target=\"#main\" hx-swap=\"outerHTML\">🤝 Midfielders</button> <button class=\"text-lg\" hx-get=\"/players?position=4\" hx-target=\"#main\" hx-swap=\"outerHTML\">🎯 Forwards</button></div>
 <h2>Fixtures</h2></div>
@@ -13,11 +13,17 @@
 </div></div>
 <div>
 </div>
-<div class=\"flex flex-col gap-4\"><h1>
-</h1><div class=\"flex gap-8\"><div class=\"w-24\"><img src=\"
-\" width=\"96\" height=\"96\"></div>
-</div><p>Last updated at 
-</p></div>
+<div class=\"flex flex-col gap-4\"><div class=\"flex flex-col sm:flex-row gap-8 justify-center sm:justify-start items-center\"><div class=\"w-24\"><img src=\"
+\" width=\"96\" height=\"96\"></div><h1>
+</h1></div><hr><div class=\"flex flex-col gap-8\">
+</div></div><small class=\"text-zinc-400\">Last updated at 
+</small>
 <div><h1>Fixture Difficulty Rating</h1>
 </div>
+<div><h1>Fixtures</h1><div class=\"flex flex-col gap-4\">
+<div class=\"flex flex-col gap-2\"><h2>
+ vs 
+</h2><small>
+</small></div>
+</div></div>
 <div><h1>404 - Page Not Found</h1></div>

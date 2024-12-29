@@ -66,16 +66,23 @@ type PlayersResponse struct {
 	Prev    int      `json:"prev"`
 }
 
-type Fixture struct {
-	Event           int
-	KickoffTime     time.Time
-	TeamH           int `json:"team_h"`
-	TeamA           int `json:"team_a"`
-	TeamHDifficulty int `json:"team_h_difficulty"`
-	TeamADifficulty int `json:"team_a_difficulty"`
+type FDREntry struct {
+	Event      int `json:"event"`
+	TeamId     int `json:"team_id"`
+	OpponentId int `json:"opponent_id"`
+	Difficulty int `json:"difficulty"`
 }
 
-type FDREntry struct {
-	OpponentId int
-	Difficulty int
+type FDRSchedule map[int][]FDREntry
+
+type Fixture struct {
+	Id              int
+	CreatedAt       *time.Time `json:"created_at"`
+	UpdatedAt       *time.Time `json:"updated_at"`
+	Event           int        `json:"event"`
+	KickoffTime     time.Time  `json:"kickoff_time"`
+	TeamH           int        `json:"team_h"`
+	TeamA           int        `json:"team_a"`
+	TeamHDifficulty int        `json:"team_h_difficulty"`
+	TeamADifficulty int        `json:"team_a_difficulty"`
 }
