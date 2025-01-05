@@ -20,16 +20,19 @@
 <div class=\"flex flex-col p-1 gap-2 absolute w-72 bg-zinc-900 sm:w-96 top-16 pt-2 z-10\">
 </div><div class=\"absolute top-0 left-0 w-full h-full bg-black opacity-50\" hx-post=\"/search\" hx-target=\"#search\" hx-swap=\"outerHTML\" hx-trigger=\"click\"></div>
 </div>
-<div id=\"players-table\" class=\"flex flex-col gap-4\"><table class=\"w-full\"><thead class=\"sticky top-0\"><tr class=\"text-left grid grid-cols-4\"><th><button hx-get=\"
+<div id=\"players-table\" class=\"flex flex-col gap-4\"><table class=\"w-full\"><thead class=\"sticky top-0\"><tr class=\"text-left grid grid-cols-5\"><th><button hx-get=\"
 \" hx-target=\"#players-table\">Name</button></th><th><button hx-get=\"
 \" hx-target=\"#players-table\">Position</button></th><th><button hx-get=\"
 \" hx-target=\"#players-table\">Form</button></th><th><button hx-get=\"
-\" hx-target=\"#players-table\">Cost</button></th></tr></thead> <tbody>
-<tr class=\"text-left grid grid-cols-4\"><td><label name=\"player\" for=\"
-\"><input type=\"checkbox\" id=\"
+\" hx-target=\"#players-table\">Cost</button></th><th><button hx-get=\"
+\" hx-target=\"#players-table\">Club</button></th></tr></thead> <tbody>
+<tr class=\"text-left grid grid-cols-5\"><td><label class=\"py-4\" name=\"player\" for=\"
+\"><div class=\"h-6 w-6\"><img src=\"
+\" width=\"24\" height=\"24\"></div><input type=\"checkbox\" id=\"
 \" name=\"player\" value=\"
 \"> 
 </label></td><td>
+</td><td>
 </td><td>
 </td><td>
 </td></tr>
@@ -48,12 +51,17 @@ pts</small></div></div></div></a>
 <span class=\"text-sm\">pts</span></p><small class=\"text-xs text-zinc-500\">Points</small></div><div class=\"w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center\"><p>
 <span class=\"text-sm\">m</span></p><small class=\"text-xs text-zinc-500\">Cost</small></div><div class=\"w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center\"><p>
 </p><small class=\"text-xs text-zinc-500\">Form</small></div></div></div>
-<div class=\"flex flex-col gap-2 overflow-x-scroll sm:overflow-hidden\"><div class=\"sticky grid grid-flow-col-dense gap-2\">
+<div class=\"flex flex-col gap-2\"><h2>Performance stats</h2><div class=\"flex gap-2\"><div class=\"w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center\"><p>
+</p><small class=\"text-xs text-zinc-500\" title=\"Expected Goals (xG)\">xG</small></div><div class=\"w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center\"><p>
+</p><small class=\"text-xs text-zinc-500\" title=\"Expected Assists (xA)\">xA</small></div><div class=\"w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center\"><p>
+</p><small class=\"text-xs text-zinc-500\" title=\"Expected Goal Involvements (xGI)\">xGI</small></div><div class=\"w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center\"><p>
+</p><small class=\"text-xs text-zinc-500\" title=\"Expected Goals Conceded (xGC)\">xGC</small></div></div></div>
+<div class=\"flex flex-col gap-2 overflow-x-scroll\"><div class=\"sticky grid grid-flow-col-dense gap-1\">
 <p class=\"min-w-16 text-center\">GW
 </p>
 </div><div class=\"flex flex-col gap-4\">
-<div class=\"flex flex-col gap-1\"><h2 class=\"uppercase\">
-</h2><div class=\"grid grid-flow-col-dense gap-2 pb-2\">
+<h2 class=\"uppercase\">
+</h2><div class=\"flex flex-col gap-1\"><div class=\"grid grid-flow-col-dense gap-1 pb-2\">
 <div class=\"flex flex-col gap-2 p-2 rounded-sm font-semibold text-lg min-w-16 min-h-12 text-center\" data-difficulty=\"
 \"><p class=\"uppercase\">
 </p><small>

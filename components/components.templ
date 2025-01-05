@@ -123,18 +123,22 @@ templ PlayersTable(playersResponse core.PlayersResponse, sortOptions map[string]
 	<div id="players-table" class="flex flex-col gap-4">
 		<table class="w-full">
 			<thead class="sticky top-0">
-				<tr class="text-left grid grid-cols-4">
+				<tr class="text-left grid grid-cols-5">
 					<th><button hx-get={ sortOptions["name"] } hx-target="#players-table">Name</button></th>
 					<th><button hx-get={ sortOptions["position"] } hx-target="#players-table">Position</button></th>
 					<th><button hx-get={ sortOptions["form"] } hx-target="#players-table">Form</button></th>
 					<th><button hx-get={ sortOptions["now_cost"] } hx-target="#players-table">Cost</button></th>
+					<th><button hx-get={ sortOptions["club_id"] } hx-target="#players-table">Club</button></th>
 				</tr>
 			</thead>
 			<tbody>
 				for _, p := range playersResponse.Players {
-					<tr class="text-left grid grid-cols-4">
+					<tr class="text-left grid grid-cols-5">
 						<td>
-							<label name="player" for={ strconv.Itoa(p.FplElementId) }>
+							<label class="py-4" name="player" for={ strconv.Itoa(p.FplElementId) }>
+								<div class="h-6 w-6">
+									<img src={ fmt.Sprintf("/static/images/shirts/%s.webp", shared.GetCodeFromClubId(p.ClubId)) } width="24" height="24"/>
+								</div>
 								<input type="checkbox" id={ strconv.Itoa(p.FplElementId) } name="player" value={ strconv.Itoa(p.FplElementId) }/>
 								{ p.Name }
 							</label>
@@ -142,6 +146,7 @@ templ PlayersTable(playersResponse core.PlayersResponse, sortOptions map[string]
 						<td>{ strconv.Itoa(p.Position) }</td>
 						<td>{ strconv.FormatFloat(p.Form, 'f', -1, 32) }</td>
 						<td>{ strconv.FormatFloat(p.NowCost, 'f', -1, 32) }</td>
+						<td>{ shared.GetCodeFromClubId(p.ClubId) }</td>
 					</tr>
 				}
 			</tbody>
@@ -203,18 +208,42 @@ templ PlayerKeyStats(p core.Player) {
 	</div>
 }
 
+templ PlayerPerformanceStats(p core.Player) {
+	<div class="flex flex-col gap-2">
+		<h2>Performance stats</h2>
+		<div class="flex gap-2">
+			<div class="w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center">
+				<p>{ strconv.FormatFloat(p.ExpectedGoals, 'f', -1, 32) }</p>
+				<small class="text-xs text-zinc-500" title="Expected Goals (xG)">xG</small>
+			</div>
+			<div class="w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center">
+				<p>{ strconv.FormatFloat(p.ExpectedAssists, 'f', -1, 32) }</p>
+				<small class="text-xs text-zinc-500"  title="Expected Assists (xA)">xA</small>
+			</div>
+			<div class="w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center">
+				<p>{ strconv.FormatFloat(p.ExpectedGoalInvolvements, 'f', -1, 32) }</p>
+				<small class="text-xs text-zinc-500"  title="Expected Goal Involvements (xGI)">xGI</small>
+			</div>
+			<div class="w-20 h-12 font-mono border-2 border-zinc-700 rounded-full flex flex-col items-center justify-center">
+				<p>{ strconv.FormatFloat(p.ExpectedGoalsConceded, 'f', -1, 32) }</p>
+				<small class="text-xs text-zinc-500"  title="Expected Goals Conceded (xGC)">xGC</small>
+			</div>
+		</div>
+	</div>
+}
+
 templ FDRSchedule(schedule core.FDRSchedule) {
-	<div class="flex flex-col gap-2 overflow-x-scroll sm:overflow-hidden">
-		<div class="sticky grid grid-flow-col-dense gap-2">
+	<div class="flex flex-col gap-2 overflow-x-scroll">
+		<div class="sticky grid grid-flow-col-dense gap-1">
 			for i := range(38) {
 				<p class="min-w-16 text-center">GW{ strconv.Itoa(i) }</p>
 			}
 		</div>
 		<div class="flex flex-col gap-4">
 			for i := range schedule {
+				<h2 class="uppercase">{ shared.GetCodeFromClubId(i) }</h2>
 				<div class="flex flex-col gap-1">
-					<h2 class="uppercase">{ shared.GetCodeFromClubId(i) }</h2>
-					<div class="grid grid-flow-col-dense gap-2 pb-2">
+					<div class="grid grid-flow-col-dense gap-1 pb-2">
 						for _, f := range schedule[i] {
 							<div class="flex flex-col gap-2 p-2 rounded-sm font-semibold text-lg min-w-16 min-h-12 text-center" data-difficulty={ strconv.Itoa(f.Difficulty) }>
 								<p class="uppercase">{ shared.GetCodeFromClubId(f.OpponentId) }</p>

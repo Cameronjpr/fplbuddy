@@ -160,7 +160,7 @@ func HandleGetEntryPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleFDRPage(w http.ResponseWriter, r *http.Request) {
-	schedule, err := lib.GetFDRSchedule()
+	schedule, err := lib.GetFDRSchedule(-1)
 
 	if err != nil {
 		fmt.Println("error fetching fdr schedule", err)

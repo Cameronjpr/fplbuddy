@@ -80,7 +80,7 @@ func GetPlayers(skip, limit int, search string, sort, dir string) (core.PlayersR
 }
 
 func GetTrendingPlayers() ([]core.Player, error) {
-	query := "SELECT * FROM players ORDER BY now_cost DESC LIMIT 12"
+	query := "SELECT * FROM players ORDER BY form DESC LIMIT 12"
 	ctx := context.Background()
 	db := shared.LoadEnvVar("DATABASE_URL")
 

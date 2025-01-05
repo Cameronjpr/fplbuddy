@@ -146,7 +146,7 @@ func handleGetPlayer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fdr, err := lib.GetFDRSchedule()
+	fdr, err := lib.GetFDRSchedule(p.ClubId)
 	if err != nil {
 		fmt.Println("error fetching fdr", err)
 		http.Error(w, "error fetching fdr", http.StatusInternalServerError)

@@ -11,7 +11,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func GetFDRSchedule() (core.FDRSchedule, error) {
+func GetFDRSchedule(clubId int) (core.FDRSchedule, error) {
 	db := shared.LoadEnvVar("DATABASE_URL")
 	dbpool, err := pgxpool.New(context.Background(), db)
 	if err != nil {
@@ -21,6 +21,9 @@ func GetFDRSchedule() (core.FDRSchedule, error) {
 	defer dbpool.Close()
 
 	query := "SELECT * FROM fixtures"
+	if clubId != -1 {
+		query = fmt.Sprintf("SELECT * FROM fixtures WHERE team_h = %d OR team_a = %d", clubId, clubId)
+	}
 	rows, err := dbpool.Query(context.Background(), query)
 
 	if err != nil {
@@ -38,6 +41,10 @@ func GetFDRSchedule() (core.FDRSchedule, error) {
 
 	for _, fixture := range fixtures {
 		for i := 0; i < 20; i++ {
+			if clubId != -1 && clubId != i {
+				continue
+			}
+
 			if fixture.TeamH == i {
 				schedule[i] = append(schedule[i], core.FDREntry{
 					Event:      fixture.Event,
